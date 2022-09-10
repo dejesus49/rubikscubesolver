@@ -14,11 +14,9 @@ public class RubiksCube /* extends JPanel */ {
     static String COLORS = "ROYGBW";
     static char[][][] INSTRUCTIONCUBE = new char[][][]{{{'1','2','3'}, {'4','W','5'}, {'6','7','8'}}, {{'1','2','3'}, {'4','B','5'}, {'6','7','8'}}, {{'1','2','3'}, {'4','O','5'}, {'6','7','8'}}, {{'1','2','3'}, {'4','R','5'}, {'6','7','8'}}, {{'1','2','3'}, {'4','Y','5'}, {'6','7','8'}}, {{'1','2','3'}, {'4','G','5'}, {'6','7','8'}}};
     static char[][][] SOLVEDCUBE = new char[][][]{{{'W', 'W', 'W'}, {'W', 'W', 'W'}, {'W', 'W', 'W'}}, {{'B', 'B', 'B'}, {'B', 'B', 'B'}, {'B', 'B', 'B'}}, {{'O', 'O', 'O'}, {'O', 'O', 'O'}, {'O', 'O', 'O'}}, {{'R', 'R', 'R'}, {'R', 'R', 'R'}, {'R', 'R', 'R'}}, {{'Y', 'Y', 'Y'}, {'Y', 'Y', 'Y'}, {'Y', 'Y', 'Y'}}, {{'G', 'G', 'G'}, {'G', 'G', 'G'}, {'G', 'G', 'G'}}};
-    static Queue<String>SOLUTION = new LinkedList<String>() {
-        
-    };
+    static Queue<String>SOLUTION = new LinkedList<String>();
 
-    private static boolean printRules(Scanner in) {
+    public static boolean printRules(Scanner in) {
         System.out.println("First, let's make sure you hold the cube right!");
         System.out.println("Hold the cube with the face with the white center facing you.");
         System.out.println("This will make the face with the yellow center face away from you.");
@@ -36,7 +34,7 @@ public class RubiksCube /* extends JPanel */ {
         return proceed;
     }
 
-    private static boolean inputCheck(String userInput) {
+    public static boolean inputCheck(String userInput) {
         boolean check = true;
         if (userInput.length() < 59) {
             check = false;
@@ -83,7 +81,7 @@ public class RubiksCube /* extends JPanel */ {
         System.out.println("Please enter your cube orientation or type 'quit' to quit the program:");
     }
 
-    private static char[][][] getCube(Scanner in, char[][][] cube) {
+    public static char[][][] getCube(Scanner in, char[][][] cube) {
         /* print out the defaultCube to give a visual of how the cube orientation should be input */
         getCubeInstructions();
         String userInput = in.nextLine().toUpperCase();
@@ -162,7 +160,7 @@ public class RubiksCube /* extends JPanel */ {
  * 3 dimensional array
  * Prints out a map of the rubiks cube
  */
-    private static void printCubeMap(char[][][] cube) {
+    public static void printCubeMap(char[][][] cube) {
         System.out.println();
         for (int j = 0; j < 3; ++j) {
             System.out.print("       ");
@@ -200,377 +198,7 @@ public class RubiksCube /* extends JPanel */ {
         }
     }
 
-    private static char[][][] swapCW(char[][][] cube, int i1, int j1, int k1, int i2, int j2, int k2) {
-        char temp = cube[i1][j1][k1];
-        cube[i1][j1][k1] = cube[i2][j2][k2];
-        cube[i2][j2][k2] = temp;
-        return cube;
-    }
-
-    private static char[][][] swapCCW(char[][][] cube, int i2, int j2, int k2, int i1, int j1, int k1) {
-        char temp = cube[i1][j1][k1];
-        cube[i1][j1][k1] = cube[i2][j2][k2];
-        cube[i2][j2][k2] = temp;
-        return cube;
-    }
-
-    private static char[][][] WCW(char[][][] cube) {
-        cube = swapCW(cube, 0, 0, 0, 0, 0, 2);
-        cube = swapCW(cube, 0, 0, 1, 0, 1, 2);
-        cube = swapCW(cube, 0, 0, 2, 0, 2, 2);
-        cube = swapCW(cube, 0, 1, 0, 0, 0, 1);
-        cube = swapCW(cube, 0, 1, 1, 0, 1, 1);
-        cube = swapCW(cube, 0, 1, 2, 0, 2, 1);
-        cube = swapCW(cube, 0, 2, 0, 0, 0, 0);
-        cube = swapCW(cube, 0, 2, 1, 0, 1, 0);
-        cube = swapCW(cube, 0, 2, 2, 0, 2, 0);
-
-        cube = swapCW(cube, 1, 0, 0, 3, 0, 0);
-        cube = swapCW(cube, 1, 1, 0, 3, 1, 0);
-        cube = swapCW(cube, 1, 2, 0, 3, 2, 0);
-        cube = swapCW(cube, 2, 0, 0, 1, 0, 0);
-        cube = swapCW(cube, 2, 1, 0, 1, 1, 0);
-        cube = swapCW(cube, 2, 2, 0, 1, 2, 0);
-        cube = swapCW(cube, 3, 0, 0, 5, 2, 2);
-        cube = swapCW(cube, 3, 1, 0, 5, 1, 2);
-        cube = swapCW(cube, 3, 2, 0, 5, 0, 2);
-        cube = swapCW(cube, 5, 0, 2, 2, 0, 0);
-        cube = swapCW(cube, 5, 1, 2, 2, 1, 0);
-        cube = swapCW(cube, 5, 2, 2, 2, 2, 0);
-
-        SOLUTION.add("W");
-
-        return cube;
-    }
-
-    private static char[][][] WCCW(char[][][] cube) {
-        cube = swapCCW(cube, 0, 0, 0, 0, 0, 2);
-        cube = swapCCW(cube, 0, 0, 1, 0, 1, 2);
-        cube = swapCCW(cube, 0, 0, 2, 0, 2, 2);
-        cube = swapCCW(cube, 0, 1, 0, 0, 0, 1);
-        cube = swapCCW(cube, 0, 1, 1, 0, 1, 1);
-        cube = swapCCW(cube, 0, 1, 2, 0, 2, 1);
-        cube = swapCCW(cube, 0, 2, 0, 0, 0, 0);
-        cube = swapCCW(cube, 0, 2, 1, 0, 1, 0);
-        cube = swapCCW(cube, 0, 2, 2, 0, 2, 0);
-
-        cube = swapCCW(cube, 1, 0, 0, 3, 0, 0);
-        cube = swapCCW(cube, 1, 1, 0, 3, 1, 0);
-        cube = swapCCW(cube, 1, 2, 0, 3, 2, 0);
-        cube = swapCCW(cube, 2, 0, 0, 1, 0, 0);
-        cube = swapCCW(cube, 2, 1, 0, 1, 1, 0);
-        cube = swapCCW(cube, 2, 2, 0, 1, 2, 0);
-        cube = swapCCW(cube, 3, 0, 0, 5, 2, 2);
-        cube = swapCCW(cube, 3, 1, 0, 5, 1, 2);
-        cube = swapCCW(cube, 3, 2, 0, 5, 0, 2);
-        cube = swapCCW(cube, 5, 0, 2, 2, 0, 0);
-        cube = swapCCW(cube, 5, 1, 2, 2, 1, 0);
-        cube = swapCCW(cube, 5, 2, 2, 2, 2, 0);
-
-        SOLUTION.add("W!");
-
-        return cube;
-    }
-
-    private static char[][][] BCW(char[][][] cube) {
-        cube = swapCW(cube, 1, 0, 0, 1, 0, 2);
-        cube = swapCW(cube, 1, 0, 1, 1, 1, 2);
-        cube = swapCW(cube, 1, 0, 2, 1, 2, 2);
-        cube = swapCW(cube, 1, 1, 0, 1, 0, 1);
-        cube = swapCW(cube, 1, 1, 1, 1, 1, 1);
-        cube = swapCW(cube, 1, 1, 2, 1, 2, 1);
-        cube = swapCW(cube, 1, 2, 0, 1, 0, 0);
-        cube = swapCW(cube, 1, 2, 1, 1, 1, 0);
-        cube = swapCW(cube, 1, 2, 2, 1, 2, 0);
-
-        cube = swapCW(cube, 0, 0, 2, 2, 2, 2);
-        cube = swapCW(cube, 0, 1, 2, 2, 2, 1);
-        cube = swapCW(cube, 0, 2, 2, 2, 2, 0);
-        cube = swapCW(cube, 2, 2, 0, 4, 0, 0);
-        cube = swapCW(cube, 2, 2, 1, 4, 1, 0);
-        cube = swapCW(cube, 2, 2, 2, 4, 2, 0);
-        cube = swapCW(cube, 3, 0, 0, 0, 0, 2);
-        cube = swapCW(cube, 3, 0, 1, 0, 1, 2);
-        cube = swapCW(cube, 3, 0, 2, 0, 2, 2);
-        cube = swapCW(cube, 4, 0, 0, 3, 0, 2);
-        cube = swapCW(cube, 4, 1, 0, 3, 0, 1);
-        cube = swapCW(cube, 4, 2, 0, 3, 0, 0);
-
-        SOLUTION.add("B");
-
-        return cube;
-    }
-
-    private static char[][][] BCCW(char[][][] cube) {
-        cube = swapCCW(cube, 1, 0, 0, 1, 0, 2);
-        cube = swapCCW(cube, 1, 0, 1, 1, 1, 2);
-        cube = swapCCW(cube, 1, 0, 2, 1, 2, 2);
-        cube = swapCCW(cube, 1, 1, 0, 1, 0, 1);
-        cube = swapCCW(cube, 1, 1, 1, 1, 1, 1);
-        cube = swapCCW(cube, 1, 1, 2, 1, 2, 1);
-        cube = swapCCW(cube, 1, 2, 0, 1, 0, 0);
-        cube = swapCCW(cube, 1, 2, 1, 1, 1, 0);
-        cube = swapCCW(cube, 1, 2, 2, 1, 2, 0);
-
-        cube = swapCCW(cube, 0, 0, 2, 2, 2, 2);
-        cube = swapCCW(cube, 0, 1, 2, 2, 2, 1);
-        cube = swapCCW(cube, 0, 2, 2, 2, 2, 0);
-        cube = swapCCW(cube, 2, 2, 0, 4, 0, 0);
-        cube = swapCCW(cube, 2, 2, 1, 4, 1, 0);
-        cube = swapCCW(cube, 2, 2, 2, 4, 2, 0);
-        cube = swapCCW(cube, 3, 0, 0, 0, 0, 2);
-        cube = swapCCW(cube, 3, 0, 1, 0, 1, 2);
-        cube = swapCCW(cube, 3, 0, 2, 0, 2, 2);
-        cube = swapCCW(cube, 4, 0, 0, 3, 0, 2);
-        cube = swapCCW(cube, 4, 1, 0, 3, 0, 1);
-        cube = swapCCW(cube, 4, 2, 0, 3, 0, 0);
-
-        SOLUTION.add("B!");
-
-        return cube;
-    }
-
-    private static char[][][] OCW(char[][][] cube) {
-        
-        cube = swapCW(cube, 2, 0, 0, 2, 0, 2);
-        cube = swapCW(cube, 2, 0, 1, 2, 1, 2);
-        cube = swapCW(cube, 2, 0, 2, 2, 2, 2);
-        cube = swapCW(cube, 2, 1, 0, 2, 0, 1);
-        cube = swapCW(cube, 2, 1, 1, 2, 1, 1);
-        cube = swapCW(cube, 2, 1, 2, 2, 2, 1);
-        cube = swapCW(cube, 2, 2, 0, 2, 0, 0);
-        cube = swapCW(cube, 2, 2, 1, 2, 1, 0);
-        cube = swapCW(cube, 2, 2, 2, 2, 2, 0);
-
-        cube = swapCW(cube, 0, 0, 0, 5, 0, 0);
-        cube = swapCW(cube, 0, 0, 1, 5, 0, 1);
-        cube = swapCW(cube, 0, 0, 2, 5, 0, 2);
-        cube = swapCW(cube, 1, 0, 0, 0, 0, 0);
-        cube = swapCW(cube, 1, 0, 1, 0, 0, 1);
-        cube = swapCW(cube, 1, 0, 2, 0, 0, 2);
-        cube = swapCW(cube, 4, 0, 0, 1, 0, 0);
-        cube = swapCW(cube, 4, 0, 1, 1, 0, 1);
-        cube = swapCW(cube, 4, 0, 2, 1, 0, 2);
-        cube = swapCW(cube, 5, 0, 0, 4, 0, 0);
-        cube = swapCW(cube, 5, 0, 1, 4, 0, 1);
-        cube = swapCW(cube, 5, 0, 2, 4, 0, 2);
-
-        SOLUTION.add("O");
-
-        return cube;
-    }
-
-    private static char[][][] OCCW(char[][][] cube) {
-        
-        cube = swapCCW(cube, 2, 0, 0, 2, 0, 2);
-        cube = swapCCW(cube, 2, 0, 1, 2, 1, 2);
-        cube = swapCCW(cube, 2, 0, 2, 2, 2, 2);
-        cube = swapCCW(cube, 2, 1, 0, 2, 0, 1);
-        cube = swapCCW(cube, 2, 1, 1, 2, 1, 1);
-        cube = swapCCW(cube, 2, 1, 2, 2, 2, 1);
-        cube = swapCCW(cube, 2, 2, 0, 2, 0, 0);
-        cube = swapCCW(cube, 2, 2, 1, 2, 1, 0);
-        cube = swapCCW(cube, 2, 2, 2, 2, 2, 0);
-
-        cube = swapCCW(cube, 0, 0, 0, 5, 0, 0);
-        cube = swapCCW(cube, 0, 0, 1, 5, 0, 1);
-        cube = swapCCW(cube, 0, 0, 2, 5, 0, 2);
-        cube = swapCCW(cube, 1, 0, 0, 0, 0, 0);
-        cube = swapCCW(cube, 1, 0, 1, 0, 0, 1);
-        cube = swapCCW(cube, 1, 0, 2, 0, 0, 2);
-        cube = swapCCW(cube, 4, 0, 0, 1, 0, 0);
-        cube = swapCCW(cube, 4, 0, 1, 1, 0, 1);
-        cube = swapCCW(cube, 4, 0, 2, 1, 0, 2);
-        cube = swapCCW(cube, 5, 0, 0, 4, 0, 0);
-        cube = swapCCW(cube, 5, 0, 1, 4, 0, 1);
-        cube = swapCCW(cube, 5, 0, 2, 4, 0, 2);
-
-        SOLUTION.add("O!");
-
-        return cube;
-    }
-
-    private static char[][][] RCW(char[][][] cube) {
-        
-        cube = swapCW(cube, 3, 0, 0, 3, 0, 2);
-        cube = swapCW(cube, 3, 0, 1, 3, 1, 2);
-        cube = swapCW(cube, 3, 0, 2, 3, 2, 2);
-        cube = swapCW(cube, 3, 1, 0, 3, 0, 1);
-        cube = swapCW(cube, 3, 1, 1, 3, 1, 1);
-        cube = swapCW(cube, 3, 1, 2, 3, 2, 1);
-        cube = swapCW(cube, 3, 2, 0, 3, 0, 0);
-        cube = swapCW(cube, 3, 2, 1, 3, 1, 0);
-        cube = swapCW(cube, 3, 2, 2, 3, 2, 0);
-
-        cube = swapCW(cube, 0, 2, 0, 1, 2, 0);
-        cube = swapCW(cube, 0, 2, 1, 1, 2, 1);
-        cube = swapCW(cube, 0, 2, 2, 1, 2, 2);
-        cube = swapCW(cube, 1, 2, 0, 4, 2, 0);
-        cube = swapCW(cube, 1, 2, 1, 4, 2, 1);
-        cube = swapCW(cube, 1, 2, 2, 4, 2, 2);
-        cube = swapCW(cube, 4, 2, 0, 5, 2, 0);
-        cube = swapCW(cube, 4, 2, 1, 5, 2, 1);
-        cube = swapCW(cube, 4, 2, 2, 5, 2, 2);
-        cube = swapCW(cube, 5, 2, 0, 0, 2, 0);
-        cube = swapCW(cube, 5, 2, 1, 0, 2, 1);
-        cube = swapCW(cube, 5, 2, 2, 0, 2, 2);
-
-        SOLUTION.add("R");
-
-        return cube;
-    }
-
-    private static char[][][] RCCW(char[][][] cube) {
-        
-        cube = swapCCW(cube, 3, 0, 0, 3, 0, 2);
-        cube = swapCCW(cube, 3, 0, 1, 3, 1, 2);
-        cube = swapCCW(cube, 3, 0, 2, 3, 2, 2);
-        cube = swapCCW(cube, 3, 1, 0, 3, 0, 1);
-        cube = swapCCW(cube, 3, 1, 1, 3, 1, 1);
-        cube = swapCCW(cube, 3, 1, 2, 3, 2, 1);
-        cube = swapCCW(cube, 3, 2, 0, 3, 0, 0);
-        cube = swapCCW(cube, 3, 2, 1, 3, 1, 0);
-        cube = swapCCW(cube, 3, 2, 2, 3, 2, 0);
-
-        cube = swapCCW(cube, 0, 2, 0, 1, 2, 0);
-        cube = swapCCW(cube, 0, 2, 1, 1, 2, 1);
-        cube = swapCCW(cube, 0, 2, 2, 1, 2, 2);
-        cube = swapCCW(cube, 1, 2, 0, 4, 2, 0);
-        cube = swapCCW(cube, 1, 2, 1, 4, 2, 1);
-        cube = swapCCW(cube, 1, 2, 2, 4, 2, 2);
-        cube = swapCCW(cube, 4, 2, 0, 5, 2, 0);
-        cube = swapCCW(cube, 4, 2, 1, 5, 2, 1);
-        cube = swapCCW(cube, 4, 2, 2, 5, 2, 2);
-        cube = swapCCW(cube, 5, 2, 0, 0, 2, 0);
-        cube = swapCCW(cube, 5, 2, 1, 0, 2, 1);
-        cube = swapCCW(cube, 5, 2, 2, 0, 2, 2);
-
-        SOLUTION.add("R!");
-
-        return cube;
-    }
-
-    private static char[][][] YCW(char[][][] cube) {
-
-        cube = swapCW(cube, 4, 0, 0, 4, 0, 2);
-        cube = swapCW(cube, 4, 0, 1, 4, 1, 2);
-        cube = swapCW(cube, 4, 0, 2, 4, 2, 2);
-        cube = swapCW(cube, 4, 1, 0, 4, 0, 1);
-        cube = swapCW(cube, 4, 1, 1, 4, 1, 1);
-        cube = swapCW(cube, 4, 1, 2, 4, 2, 1);
-        cube = swapCW(cube, 4, 2, 0, 4, 0, 0);
-        cube = swapCW(cube, 4, 2, 1, 4, 1, 0);
-        cube = swapCW(cube, 4, 2, 2, 4, 2, 0);
-
-        cube = swapCW(cube, 1, 0, 2, 2, 0, 2);
-        cube = swapCW(cube, 1, 1, 2, 2, 1, 2);
-        cube = swapCW(cube, 1, 2, 2, 2, 2, 2);
-        cube = swapCW(cube, 2, 0, 2, 5, 2, 0);
-        cube = swapCW(cube, 2, 1, 2, 5, 1, 0);
-        cube = swapCW(cube, 2, 2, 2, 5, 0, 0);
-        cube = swapCW(cube, 3, 0, 2, 1, 0, 2);
-        cube = swapCW(cube, 3, 1, 2, 1, 1, 2);
-        cube = swapCW(cube, 3, 2, 2, 1, 2, 2);
-        cube = swapCW(cube, 5, 0, 0, 3, 2, 2);
-        cube = swapCW(cube, 5, 1, 0, 3, 1, 2);
-        cube = swapCW(cube, 5, 2, 0, 3, 0, 2);
-
-        SOLUTION.add("Y");
-        
-        return cube;
-    }
-
-    private static char[][][] YCCW(char[][][] cube) {
-        
-        cube = swapCCW(cube, 4, 0, 0, 4, 0, 2);
-        cube = swapCCW(cube, 4, 0, 1, 4, 1, 2);
-        cube = swapCCW(cube, 4, 0, 2, 4, 2, 2);
-        cube = swapCCW(cube, 4, 1, 0, 4, 0, 1);
-        cube = swapCCW(cube, 4, 1, 1, 4, 1, 1);
-        cube = swapCCW(cube, 4, 1, 2, 4, 2, 1);
-        cube = swapCCW(cube, 4, 2, 0, 4, 0, 0);
-        cube = swapCCW(cube, 4, 2, 1, 4, 1, 0);
-        cube = swapCCW(cube, 4, 2, 2, 4, 2, 0);
-
-        cube = swapCCW(cube, 1, 0, 2, 2, 0, 2);
-        cube = swapCCW(cube, 1, 1, 2, 2, 1, 2);
-        cube = swapCCW(cube, 1, 2, 2, 2, 2, 2);
-        cube = swapCCW(cube, 2, 0, 2, 5, 2, 0);
-        cube = swapCCW(cube, 2, 1, 2, 5, 1, 0);
-        cube = swapCCW(cube, 2, 2, 2, 5, 0, 0);
-        cube = swapCCW(cube, 3, 0, 2, 1, 0, 2);
-        cube = swapCCW(cube, 3, 1, 2, 1, 1, 2);
-        cube = swapCCW(cube, 3, 2, 2, 1, 2, 2);
-        cube = swapCCW(cube, 5, 0, 0, 3, 2, 2);
-        cube = swapCCW(cube, 5, 1, 0, 3, 1, 2);
-        cube = swapCCW(cube, 5, 2, 0, 3, 0, 2);
-
-        SOLUTION.add("Y!");
-
-        return cube;
-    }
-
-    private static char[][][] GCW(char[][][] cube) {
-
-        cube = swapCW(cube, 5, 0, 0, 5, 0, 2);
-        cube = swapCW(cube, 5, 0, 1, 5, 1, 2);
-        cube = swapCW(cube, 5, 0, 2, 5, 2, 2);
-        cube = swapCW(cube, 5, 1, 0, 5, 0, 1);
-        cube = swapCW(cube, 5, 1, 1, 5, 1, 1);
-        cube = swapCW(cube, 5, 1, 2, 5, 2, 1);
-        cube = swapCW(cube, 5, 2, 0, 5, 0, 0);
-        cube = swapCW(cube, 5, 2, 1, 5, 1, 0);
-        cube = swapCW(cube, 5, 2, 2, 5, 2, 0);
-
-        cube = swapCW(cube, 0, 0, 0, 3, 2, 0);
-        cube = swapCW(cube, 0, 1, 0, 3, 2, 1);
-        cube = swapCW(cube, 0, 2, 0, 3, 2, 2);
-        cube = swapCW(cube, 2, 0, 0, 0, 2, 0);
-        cube = swapCW(cube, 2, 0, 1, 0, 1, 0);
-        cube = swapCW(cube, 2, 0, 2, 0, 0, 0);
-        cube = swapCW(cube, 3, 2, 0, 4, 2, 2);
-        cube = swapCW(cube, 3, 2, 1, 4, 1, 2);
-        cube = swapCW(cube, 3, 2, 2, 4, 0, 2);
-        cube = swapCW(cube, 4, 0, 2, 2, 0, 0);
-        cube = swapCW(cube, 4, 1, 2, 2, 0, 1);
-        cube = swapCW(cube, 4, 2, 2, 2, 0, 2);
-
-        SOLUTION.add("G");
-        
-        return cube;
-    }
-
-    private static char[][][] GCCW(char[][][] cube) {
-
-        cube = swapCCW(cube, 5, 0, 0, 5, 0, 2);
-        cube = swapCCW(cube, 5, 0, 1, 5, 1, 2);
-        cube = swapCCW(cube, 5, 0, 2, 5, 2, 2);
-        cube = swapCCW(cube, 5, 1, 0, 5, 0, 1);
-        cube = swapCCW(cube, 5, 1, 1, 5, 1, 1);
-        cube = swapCCW(cube, 5, 1, 2, 5, 2, 1);
-        cube = swapCCW(cube, 5, 2, 0, 5, 0, 0);
-        cube = swapCCW(cube, 5, 2, 1, 5, 1, 0);
-        cube = swapCCW(cube, 5, 2, 2, 5, 2, 0);
-
-        cube = swapCCW(cube, 0, 0, 0, 3, 2, 0);
-        cube = swapCCW(cube, 0, 1, 0, 3, 2, 1);
-        cube = swapCCW(cube, 0, 2, 0, 3, 2, 2);
-        cube = swapCCW(cube, 2, 0, 0, 0, 2, 0);
-        cube = swapCCW(cube, 2, 0, 1, 0, 1, 0);
-        cube = swapCCW(cube, 2, 0, 2, 0, 0, 0);
-        cube = swapCCW(cube, 3, 2, 0, 4, 2, 2);
-        cube = swapCCW(cube, 3, 2, 1, 4, 1, 2);
-        cube = swapCCW(cube, 3, 2, 2, 4, 0, 2);
-        cube = swapCCW(cube, 4, 0, 2, 2, 0, 0);
-        cube = swapCCW(cube, 4, 1, 2, 2, 0, 1);
-        cube = swapCCW(cube, 4, 2, 2, 2, 0, 2);
-
-        SOLUTION.add("G!");
-        
-        return cube;
-    }
-
-    private static void printSolution() {
+    public static void printSolution() {
         int moves = SOLUTION.size();
         for (int i = 0; i < moves; ++i) {
             String shift = SOLUTION.remove();
@@ -594,18 +222,6 @@ public class RubiksCube /* extends JPanel */ {
                 int x = 1;
                 if (x == 1) {
                     printCubeMap(SOLVEDCUBE);
-                    cube = WCW(SOLVEDCUBE);
-                    // cube = WCCW(cube);
-                    // cube = BCW(cube);
-                    // cube = BCCW(cube);
-                    // cube = OCW(cube);
-                    // cube = OCCW(cube);
-                    // cube = RCW(cube);
-                    // cube = RCCW(cube);
-                    // cube = YCW(cube);
-                    // cube = YCCW(cube);
-                    // cube = GCW(cube);
-                    // cube = GCCW(cube);
                     printSolution();
                     printCubeMap(cube);
                 }
