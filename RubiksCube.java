@@ -111,7 +111,7 @@ public class RubiksCube /* extends JPanel */ {
                 }
             }
             printCubeMap(cube);
-            System.out.print("Is this correct? Y/N: ");
+            System.out.print("Is this correct? Y/N: "); // need to check for invalid inputs
             if (in.nextLine().toUpperCase().charAt(0) == 'N') {
                 getCube(in, cube);
             }
@@ -209,12 +209,12 @@ public class RubiksCube /* extends JPanel */ {
     }
 
     public static void main(String[] args) {
-
         Scanner in = new Scanner(System.in);
         Random rand = new Random();
         String[] greetingMessages = new String[]{"Greetings!", "Hello!", "Aloha!", "Sup!", "Why hello there!", "Salutations!"};
         System.out.println("\n\n" + greetingMessages[rand.nextInt(greetingMessages.length)] + " Welcome to THE Rubiks Cube Solver!\n");
         char[][][] cube = new char[6][3][3];
+        
         if (printRules(in)) {
             getCube(in, cube);
             if (!Arrays.equals(cube, INSTRUCTIONCUBE)) {
@@ -222,9 +222,9 @@ public class RubiksCube /* extends JPanel */ {
                 int x = 1;
                 if (x == 1) {
                     printCubeMap(TESTCUBE);
-                    // cube = CubeMoves.WCCW(TESTCUBE);
-                    // Solution.add("W");
                     // cube = CubeMoves.WCW(TESTCUBE);
+                    // Solution.add("W");
+                    // cube = CubeMoves.WCCW(cube);
                     // Solution.add("W!");
                     // cube = CubeMoves.BCW(TESTCUBE);
                     // Solution.add("B");

@@ -30,20 +30,51 @@ public class CubeMoves {
     // }
     */
 
+    private static char[][][] mainFaceCW(char[][][] cube, int mainFace) {
+        char tempEdge = cube[mainFace][0][1];
+        cube[mainFace][0][1] = cube[mainFace][1][0];
+        cube[mainFace][1][0] = cube[mainFace][2][1];
+        cube[mainFace][2][1] = cube[mainFace][1][2];
+        cube[mainFace][1][2] = tempEdge;
+        char tempCorner = cube[mainFace][0][0];
+        cube[mainFace][0][0] = cube[mainFace][2][0];
+        cube[mainFace][2][0] = cube[mainFace][2][2];
+        cube[mainFace][2][2] = cube[mainFace][0][2];
+        cube[mainFace][0][2] = tempCorner;
+
+        return cube;
+    }
+
+    private static char[][][] mainFaceCCW(char[][][] cube, int mainFace) {
+        char tempEdge = cube[mainFace][0][1];
+        cube[mainFace][0][1] = cube[mainFace][1][2];
+        cube[mainFace][1][2] = cube[mainFace][2][1];
+        cube[mainFace][2][1] = cube[mainFace][1][0];
+        cube[mainFace][1][0] = tempEdge;
+        char tempCorner = cube[mainFace][0][0];
+        cube[mainFace][0][0] = cube[mainFace][0][2];
+        cube[mainFace][0][2] = cube[mainFace][2][2];
+        cube[mainFace][2][2] = cube[mainFace][2][0];
+        cube[mainFace][2][0] = tempCorner;
+
+        return cube;
+    }
+
     public static char[][][] WCW(char[][][] cube) {
-
-        // char[] tempMainFace = new char[3];
-        // char[] tempSideFace = new char[3];
-        // for (int i = 0; i < 3; ++i) {
-        //     tempMainFace[i] = cube[0][0][i];
+        /*
+        char[] tempMainFace = new char[3];
+        char[] tempSideFace = new char[3];
+        for (int i = 0; i < 3; ++i) {
+            tempMainFace[i] = cube[0][0][i];
+        }
+        for (int i = 0; i < 3; ++i) {
+            tempMainFace[i] = cube[0][0][i];
+            cube[0][0][i] = cube[0][2-i][0];
+            cube[0][1][i] = cube[0][2-i][1];
+            cube[0][2][i] = cube[0][2-i][2];
         // }
-        // for (int i = 0; i < 3; ++i) {
-        //     tempMainFace[i] = cube[0][0][i];
-        //     cube[0][0][i] = cube[0][2-i][0];
-        //     cube[0][1][i] = cube[0][2-i][1];
-        //     cube[0][2][i] = cube[0][2-i][2];
-        // }
-
+        */
+        /*
         char tempEdge = cube[0][0][1];
         cube[0][0][1] = cube[0][1][0];
         cube[0][1][0] = cube[0][2][1];
@@ -54,17 +85,24 @@ public class CubeMoves {
         cube[0][2][0] = cube[0][2][2];
         cube[0][2][2] = cube[0][0][2];
         cube[0][0][2] = tempCorner;
+        */
+        cube = mainFaceCW(cube, 0);
+        // char[] tempSideFace = new char[3];
+        char temp = ' ';
 
-        char[] tempSideFace = new char[3];
         for (int i = 0; i < 3; ++i) {
-            tempSideFace[i] = cube[1][i][0];
+            // tempSideFace[i] = cube[1][i][0];
+            temp = cube[1][i][0];
             cube[1][i][0] = cube[2][i][0];
-            cube[2][i][0] = cube[5][i][2];
-            cube[5][i][2] = cube[3][2-i][0];
+            cube[2][i][0] = cube[5][2-i][2];
+            cube[5][2-i][2] = cube[3][i][0];
+            // cube[3][i][0] = tempSideFace[i];
+            cube[3][i][0] = temp;
         }
-        for (int i = 0; i <3; ++i) {
-            cube[3][i][0] = tempSideFace[i];
-        }
+        /*
+        // for (int i = 0; i <3; ++i) {
+        //     cube[3][i][0] = tempSideFace[i];
+        // }
         /*
         // cube = swapCW(cube, 0, 0, 0, 0, 0, 2);
         // cube = swapCW(cube, 0, 0, 1, 0, 1, 2);
@@ -95,7 +133,7 @@ public class CubeMoves {
     }
 
     public static char[][][] WCCW(char[][][] cube) {
-
+        /*
         char tempEdge = cube[0][0][1];
         cube[0][0][1] = cube[0][1][2];
         cube[0][1][2] = cube[0][2][1];
@@ -106,16 +144,19 @@ public class CubeMoves {
         cube[0][0][2] = cube[0][2][2];
         cube[0][2][2] = cube[0][2][0];
         cube[0][2][0] = tempCorner;
+        */
+        cube = mainFaceCCW(cube, 0);
+        // char[] tempSideFace = new char[3];
+        char temp = ' ';
 
-        char[] tempSideFace = new char[3];
         for (int i = 0; i < 3; ++i) {
-            tempSideFace[i] = cube[1][i][0];
+            // tempSideFace[i] = cube[1][i][0];
+            temp = cube[1][i][0];
             cube[1][i][0] = cube[3][i][0];
             cube[3][i][0] = cube[5][2-i][2];
-            cube[5][2-i][2] = cube[2][2-i][0];
-        }
-        for (int i = 0; i <3; ++i) {
-            cube[2][i][0] = tempSideFace[i];
+            cube[5][2-i][2] = cube[2][i][0];
+            // cube[2][i][0] = tempSideFace[i];
+            cube[2][i][0] = temp;
         }
         /*
         // cube = swapCCW(cube, 0, 0, 0, 0, 0, 2);
@@ -147,27 +188,30 @@ public class CubeMoves {
     }
 
     public static char[][][] BCW(char[][][] cube) {
-        
-        char tempEdge = cube[1][0][1];
-        cube[1][0][1] = cube[1][1][0];
-        cube[1][1][0] = cube[1][2][1];
-        cube[1][2][1] = cube[1][1][2];
-        cube[1][1][2] = tempEdge;
-        char tempCorner = cube[1][0][0];
-        cube[1][0][0] = cube[1][2][0];
-        cube[1][2][0] = cube[1][2][2];
-        cube[1][2][2] = cube[1][0][2];
-        cube[1][0][2] = tempCorner;
+        /*
+        // char tempEdge = cube[1][0][1];
+        // cube[1][0][1] = cube[1][1][0];
+        // cube[1][1][0] = cube[1][2][1];
+        // cube[1][2][1] = cube[1][1][2];
+        // cube[1][1][2] = tempEdge;
+        // char tempCorner = cube[1][0][0];
+        // cube[1][0][0] = cube[1][2][0];
+        // cube[1][2][0] = cube[1][2][2];
+        // cube[1][2][2] = cube[1][0][2];
+        // cube[1][0][2] = tempCorner;
+        */
+        cube = mainFaceCW(cube, 1);
+        // char[] tempSideFace = new char[3];
+        char temp = ' ';
 
-        char[] tempSideFace = new char[3];
         for (int i = 0; i < 3; ++i) {
-            tempSideFace[i] = cube[0][i][2];
+            // tempSideFace[i] = cube[0][i][2];
+            temp = cube[0][i][2];
             cube[0][i][2] = cube[3][0][i];
             cube[3][0][i] = cube[4][2-i][0];
             cube[4][2-i][0] = cube[2][2][2-i];
-        }
-        for (int i = 0; i <3; ++i) {
-            cube[2][2][i] = tempSideFace[2-i];
+            // cube[2][2][2-i] = tempSideFace[i];
+            cube[2][2][2-i] = temp;
         }
         /*
         // cube = swapCW(cube, 1, 0, 0, 1, 0, 2);
@@ -199,7 +243,7 @@ public class CubeMoves {
     }
 
     public static char[][][] BCCW(char[][][] cube) {
-
+        /*
         char tempEdge = cube[1][0][1];
         cube[1][0][1] = cube[1][1][2];
         cube[1][1][2] = cube[1][2][1];
@@ -210,16 +254,19 @@ public class CubeMoves {
         cube[1][0][2] = cube[1][2][2];
         cube[1][2][2] = cube[1][2][0];
         cube[1][2][0] = tempCorner;
+        */
+        cube = mainFaceCCW(cube, 1);
+        // char[] tempSideFace = new char[3];
+        char temp = ' ';
 
-        char[] tempSideFace = new char[3];
         for (int i = 0; i < 3; ++i) {
-            tempSideFace[i] = cube[0][i][2];
+            // tempSideFace[i] = cube[0][i][2];
+            temp = cube[0][i][2];
             cube[0][i][2] = cube[2][2][2-i];
             cube[2][2][2-i] = cube[4][2-i][0];
             cube[4][2-i][0] = cube[3][0][i];
-        }
-        for (int i = 0; i <3; ++i) {
-            cube[3][0][i] = tempSideFace[i];
+            // cube[3][0][i] = tempSideFace[i];
+            cube[3][0][i] = temp;
         }
         /*
         // cube = swapCCW(cube, 1, 0, 0, 1, 0, 2);
@@ -251,7 +298,32 @@ public class CubeMoves {
     }
 
     public static char[][][] OCW(char[][][] cube) {
-        
+        /*
+        char tempEdge = cube[2][0][1];
+        cube[2][0][1] = cube[2][1][0];
+        cube[2][1][0] = cube[2][2][1];
+        cube[2][2][1] = cube[2][1][2];
+        cube[2][1][2] = tempEdge;
+        char tempCorner = cube[2][0][0];
+        cube[2][0][0] = cube[2][2][0];
+        cube[2][2][0] = cube[2][2][2];
+        cube[2][2][2] = cube[2][0][2];
+        cube[2][0][2] = tempCorner;
+        */
+        cube = mainFaceCW(cube, 2);
+        // char[] tempSideFace = new char[3];
+        char temp = ' ';
+
+        for (int i = 0; i < 3; ++i) {
+            // tempSideFace[i] = cube[0][0][i];
+            temp = cube[0][0][i];
+            cube[0][0][i] = cube[1][0][i];
+            cube[1][0][i] = cube[4][0][i];
+            cube[4][0][i] = cube[5][0][i];
+            // cube[5][0][i] = tempSideFace[i];
+            cube[5][0][i] = temp;
+        }
+        /*
         // cube = swapCW(cube, 2, 0, 0, 2, 0, 2);
         // cube = swapCW(cube, 2, 0, 1, 2, 1, 2);
         // cube = swapCW(cube, 2, 0, 2, 2, 2, 2);
@@ -276,12 +348,37 @@ public class CubeMoves {
         // cube = swapCW(cube, 5, 0, 0, 4, 0, 0);
         // cube = swapCW(cube, 5, 0, 1, 4, 0, 1);
         // cube = swapCW(cube, 5, 0, 2, 4, 0, 2);
-
+        */
         return cube;
     }
 
     public static char[][][] OCCW(char[][][] cube) {
-        
+        /*
+        char tempEdge = cube[2][0][1];
+        cube[2][0][1] = cube[2][1][2];
+        cube[2][1][2] = cube[2][2][1];
+        cube[2][2][1] = cube[2][1][0];
+        cube[2][1][0] = tempEdge;
+        char tempCorner = cube[2][0][0];
+        cube[2][0][0] = cube[2][0][2];
+        cube[2][0][2] = cube[2][2][2];
+        cube[2][2][2] = cube[2][2][0];
+        cube[2][2][0] = tempCorner;
+        */
+        cube = mainFaceCCW(cube, 2);
+        // char[] tempSideFace = new char[3];
+        char temp = ' ';
+
+        for (int i = 0; i < 3; ++i) {
+            // tempSideFace[i] = cube[0][0][i];
+            temp = cube[0][0][i];
+            cube[0][0][i] = cube[5][0][i];
+            cube[5][0][i] = cube[4][0][i];
+            cube[4][0][i] = cube[1][0][i];
+            // cube[1][0][i] = tempSideFace[i];
+            cube[1][0][i] = temp;
+        }
+        /*
         // cube = swapCCW(cube, 2, 0, 0, 2, 0, 2);
         // cube = swapCCW(cube, 2, 0, 1, 2, 1, 2);
         // cube = swapCCW(cube, 2, 0, 2, 2, 2, 2);
@@ -306,12 +403,37 @@ public class CubeMoves {
         // cube = swapCCW(cube, 5, 0, 0, 4, 0, 0);
         // cube = swapCCW(cube, 5, 0, 1, 4, 0, 1);
         // cube = swapCCW(cube, 5, 0, 2, 4, 0, 2);
-
+        */
         return cube;
     }
 
     public static char[][][] RCW(char[][][] cube) {
-        
+        /*
+        char tempEdge = cube[3][0][1];
+        cube[3][0][1] = cube[3][1][0];
+        cube[3][1][0] = cube[3][2][1];
+        cube[3][2][1] = cube[3][1][2];
+        cube[3][1][2] = tempEdge;
+        char tempCorner = cube[3][0][0];
+        cube[3][0][0] = cube[3][2][0];
+        cube[3][2][0] = cube[3][2][2];
+        cube[3][2][2] = cube[3][0][2];
+        cube[3][0][2] = tempCorner;
+        */
+        cube = mainFaceCW(cube, 3);
+        // char[] tempSideFace = new char[3];
+        char temp = ' ';
+
+        for (int i = 0; i < 3; ++i) {
+            // tempSideFace[i] = cube[0][2][i];
+            temp = cube[0][2][i];
+            cube[0][2][i] = cube[5][2][i];
+            cube[5][2][i] = cube[4][2][i];
+            cube[4][2][i] = cube[1][2][i];
+            // cube[1][2][i] = tempSideFace[i];
+            cube[1][2][i] = temp;
+        }
+        /*
         // cube = swapCW(cube, 3, 0, 0, 3, 0, 2);
         // cube = swapCW(cube, 3, 0, 1, 3, 1, 2);
         // cube = swapCW(cube, 3, 0, 2, 3, 2, 2);
@@ -336,12 +458,37 @@ public class CubeMoves {
         // cube = swapCW(cube, 5, 2, 0, 0, 2, 0);
         // cube = swapCW(cube, 5, 2, 1, 0, 2, 1);
         // cube = swapCW(cube, 5, 2, 2, 0, 2, 2);
-
+        */
         return cube;
     }
 
     public static char[][][] RCCW(char[][][] cube) {
-        
+        /*
+        char tempEdge = cube[3][0][1];
+        cube[3][0][1] = cube[3][1][2];
+        cube[3][1][2] = cube[3][2][1];
+        cube[3][2][1] = cube[3][1][0];
+        cube[3][1][0] = tempEdge;
+        char tempCorner = cube[3][0][0];
+        cube[3][0][0] = cube[3][0][2];
+        cube[3][0][2] = cube[3][2][2];
+        cube[3][2][2] = cube[3][2][0];
+        cube[3][2][0] = tempCorner;
+        */
+        cube = mainFaceCCW(cube, 3);
+        // char[] tempSideFace = new char[3];
+        char temp = ' ';
+
+        for (int i = 0; i < 3; ++i) {
+            // tempSideFace[i] = cube[0][0][i];
+            temp = cube[0][2][i];
+            cube[0][2][i] = cube[1][2][i];
+            cube[1][2][i] = cube[4][2][i];
+            cube[4][2][i] = cube[5][2][i];
+            // cube[1][0][i] = tempSideFace[i];
+            cube[5][2][i] = temp;
+        }
+        /*
         // cube = swapCCW(cube, 3, 0, 0, 3, 0, 2);
         // cube = swapCCW(cube, 3, 0, 1, 3, 1, 2);
         // cube = swapCCW(cube, 3, 0, 2, 3, 2, 2);
@@ -366,12 +513,22 @@ public class CubeMoves {
         // cube = swapCCW(cube, 5, 2, 0, 0, 2, 0);
         // cube = swapCCW(cube, 5, 2, 1, 0, 2, 1);
         // cube = swapCCW(cube, 5, 2, 2, 0, 2, 2);
-
+        */
         return cube;
     }
 
     public static char[][][] YCW(char[][][] cube) {
+        cube = mainFaceCW(cube, 4);
+        char temp = ' ';
 
+        for (int i = 0; i < 3; ++i) {
+            temp = cube[1][i][2];
+            cube[1][i][2] = cube[3][i][2];
+            cube[3][i][2] = cube[5][2-i][0];
+            cube[5][2-i][0] = cube[2][i][2];
+            cube[2][i][2] = temp;
+        }
+        /*
         // cube = swapCW(cube, 4, 0, 0, 4, 0, 2);
         // cube = swapCW(cube, 4, 0, 1, 4, 1, 2);
         // cube = swapCW(cube, 4, 0, 2, 4, 2, 2);
@@ -396,12 +553,22 @@ public class CubeMoves {
         // cube = swapCW(cube, 5, 0, 0, 3, 2, 2);
         // cube = swapCW(cube, 5, 1, 0, 3, 1, 2);
         // cube = swapCW(cube, 5, 2, 0, 3, 0, 2);
-
+        */
         return cube;
     }
 
     public static char[][][] YCCW(char[][][] cube) {
-        
+        cube = mainFaceCCW(cube, 4);
+        char temp = ' ';
+
+        for (int i = 0; i < 3; ++i) {
+            temp = cube[1][i][2];
+            cube[1][i][2] = cube[2][i][2];
+            cube[2][i][2] = cube[5][2-i][0];
+            cube[5][2-i][0] = cube[2][i][2];
+            cube[2][i][2] = temp;
+        }
+        /*
         // cube = swapCCW(cube, 4, 0, 0, 4, 0, 2);
         // cube = swapCCW(cube, 4, 0, 1, 4, 1, 2);
         // cube = swapCCW(cube, 4, 0, 2, 4, 2, 2);
@@ -426,12 +593,22 @@ public class CubeMoves {
         // cube = swapCCW(cube, 5, 0, 0, 3, 2, 2);
         // cube = swapCCW(cube, 5, 1, 0, 3, 1, 2);
         // cube = swapCCW(cube, 5, 2, 0, 3, 0, 2);
-
+        */
         return cube;
     }
 
     public static char[][][] GCW(char[][][] cube) {
+        cube = mainFaceCW(cube, 5);
+        char temp = ' ';
 
+        for (int i = 0; i < 3; ++i) {
+            temp = cube[0][i][0];
+            cube[0][i][0] = cube[2][0][2-i];
+            cube[2][0][2-i] = cube[4][2-i][2];
+            cube[4][2-i][2] = cube[3][i][2];
+            cube[3][i][2] = temp;
+        }
+        /*
         // cube = swapCW(cube, 5, 0, 0, 5, 0, 2);
         // cube = swapCW(cube, 5, 0, 1, 5, 1, 2);
         // cube = swapCW(cube, 5, 0, 2, 5, 2, 2);
@@ -456,12 +633,22 @@ public class CubeMoves {
         // cube = swapCW(cube, 4, 0, 2, 2, 0, 0);
         // cube = swapCW(cube, 4, 1, 2, 2, 0, 1);
         // cube = swapCW(cube, 4, 2, 2, 2, 0, 2);
-
+        */
         return cube;
     }
 
     public static char[][][] GCCW(char[][][] cube) {
+        cube = mainFaceCCW(cube, 5);
+        char temp = ' ';
 
+        for (int i = 0; i < 3; ++i) {
+            temp = cube[0][i][0];
+            cube[0][i][0] = cube[3][2-i][0];
+            cube[3][2-i][0] = cube[4][2-i][2];
+            cube[4][2-i][2] = cube[2][0][2-i];
+            cube[2][0][2-1] = temp;
+        }
+        /*
         // cube = swapCCW(cube, 5, 0, 0, 5, 0, 2);
         // cube = swapCCW(cube, 5, 0, 1, 5, 1, 2);
         // cube = swapCCW(cube, 5, 0, 2, 5, 2, 2);
@@ -486,7 +673,7 @@ public class CubeMoves {
         // cube = swapCCW(cube, 4, 0, 2, 2, 0, 0);
         // cube = swapCCW(cube, 4, 1, 2, 2, 0, 1);
         // cube = swapCCW(cube, 4, 2, 2, 2, 0, 2);
-        
+        */
         return cube;
     }
 }
