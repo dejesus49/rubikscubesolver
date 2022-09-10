@@ -215,9 +215,7 @@ public class RubiksCube /* extends JPanel */ {
         System.out.println("\n\n" + greetingMessages[rand.nextInt(greetingMessages.length)] + " Welcome to THE Rubiks Cube Solver!\n");
         char[][][] cube = new char[6][3][3];
         if (printRules(in)) {
-
             getCube(in, cube);
-            
             if (!Arrays.equals(cube, INSTRUCTIONCUBE)) {
                 int x = 1;
                 if (x == 1) {
