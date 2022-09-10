@@ -14,7 +14,8 @@ public class RubiksCube /* extends JPanel */ {
     static String COLORS = "ROYGBW";
     static char[][][] INSTRUCTIONCUBE = new char[][][]{{{'1','2','3'}, {'4','W','5'}, {'6','7','8'}}, {{'1','2','3'}, {'4','B','5'}, {'6','7','8'}}, {{'1','2','3'}, {'4','O','5'}, {'6','7','8'}}, {{'1','2','3'}, {'4','R','5'}, {'6','7','8'}}, {{'1','2','3'}, {'4','Y','5'}, {'6','7','8'}}, {{'1','2','3'}, {'4','G','5'}, {'6','7','8'}}};
     static char[][][] SOLVEDCUBE = new char[][][]{{{'W', 'W', 'W'}, {'W', 'W', 'W'}, {'W', 'W', 'W'}}, {{'B', 'B', 'B'}, {'B', 'B', 'B'}, {'B', 'B', 'B'}}, {{'O', 'O', 'O'}, {'O', 'O', 'O'}, {'O', 'O', 'O'}}, {{'R', 'R', 'R'}, {'R', 'R', 'R'}, {'R', 'R', 'R'}}, {{'Y', 'Y', 'Y'}, {'Y', 'Y', 'Y'}, {'Y', 'Y', 'Y'}}, {{'G', 'G', 'G'}, {'G', 'G', 'G'}, {'G', 'G', 'G'}}};
-    static Queue<String>SOLUTION = new LinkedList<String>();
+    static char[][][] TESTCUBE = new char[][][]{{{'a', 'b', 'c'}, {'d', '0', 'e'}, {'f', 'g', 'h'}}, {{'i', 'j', 'k'}, {'l', '1', 'm'}, {'n', 'o', 'p'}}, {{'q', 'r', 's'}, {'t', '2', 'u'}, {'v', 'w', 'x'}}, {{'y', 'z', 'A'}, {'B', '3', 'C'}, {'D', 'E', 'F'}}, {{'G', 'H', 'I'}, {'J', '4', 'K'}, {'L', 'M', 'N'}}, {{'O', 'P', 'Q'}, {'R', '5', 'S'}, {'T', 'U', 'V'}}};
+
 
     public static boolean printRules(Scanner in) {
         System.out.println("First, let's make sure you hold the cube right!");
@@ -198,12 +199,12 @@ public class RubiksCube /* extends JPanel */ {
         }
     }
 
-    public static void printSolution() {
-        int moves = SOLUTION.size();
+    public static void printSolution(Queue<String>Solution) {
+        int moves = Solution.size();
         for (int i = 0; i < moves; ++i) {
-            String shift = SOLUTION.remove();
+            String shift = Solution.remove();
             System.out.print(shift + " ");
-            SOLUTION.add(shift);
+            Solution.add(shift);
         }
     }
 
@@ -217,10 +218,35 @@ public class RubiksCube /* extends JPanel */ {
         if (printRules(in)) {
             getCube(in, cube);
             if (!Arrays.equals(cube, INSTRUCTIONCUBE)) {
+                Queue<String>Solution = new LinkedList<String>();
                 int x = 1;
                 if (x == 1) {
-                    printCubeMap(SOLVEDCUBE);
-                    printSolution();
+                    printCubeMap(TESTCUBE);
+                    // cube = CubeMoves.WCCW(TESTCUBE);
+                    // Solution.add("W");
+                    // cube = CubeMoves.WCW(TESTCUBE);
+                    // Solution.add("W!");
+                    // cube = CubeMoves.BCW(TESTCUBE);
+                    // Solution.add("B");
+                    // cube = CubeMoves.BCCW(TESTCUBE);
+                    // Solution.add("B!");
+                    // cube = CubeMoves.OCW(TESTCUBE);
+                    // Solution.add("O");
+                    // cube = CubeMoves.OCCW(TESTCUBE);
+                    // Solution.add("O!");
+                    // cube = CubeMoves.RCW(TESTCUBE);
+                    // Solution.add("R");
+                    // cube = CubeMoves.RCCW(TESTCUBE);
+                    // Solution.add("R!");
+                    // cube = CubeMoves.YCW(TESTCUBE);
+                    // Solution.add("Y");
+                    // cube = CubeMoves.YCCW(TESTCUBE);
+                    // Solution.add("Y!");
+                    // cube = CubeMoves.GCW(TESTCUBE);
+                    // Solution.add("G");
+                    // cube = CubeMoves.GCCW(TESTCUBE);
+                    // Solution.add("G!");
+                    printSolution(Solution);
                     printCubeMap(cube);
                 }
             // whiteCross();
