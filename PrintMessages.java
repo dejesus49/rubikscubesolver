@@ -69,7 +69,7 @@ public class PrintMessages {
 
     public static void getCubeInstructions(char[][][] cube) {
         try {
-            System.out.println("\nNow let's get your cube's orientation...");
+            System.out.println("\nLet's get your cube's orientation...");
             TimeUnit.SECONDS.sleep(3);
         } catch (InterruptedException e) {
             System.out.println("Sleep interrupted.");
