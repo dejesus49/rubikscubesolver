@@ -1,9 +1,7 @@
 package rubikscubesolver.tests;
 
 import org.junit.*;
-
 import rubikscubesolver.CubeMoves;
-import rubikscubesolver.PrintMessages;
 
 public class CubeMovesTest {
     
@@ -233,7 +231,6 @@ public class CubeMovesTest {
                                         {{'y', 'z', 'A'}, {'B', '3', 'C'}, {'D', 'E', 'F'}}, {{'G', 'H', 'I'}, {'J', '4', 'K'}, {'L', 'M', 'N'}}, {{'O', 'P', 'Q'}, {'R', '5', 'S'}, {'T', 'U', 'V'}}};
         char[][][] expectedCube = new char[][][]{{{'s', 'b', 'c'}, {'r', '0', 'e'}, {'q', 'g', 'h'}}, {{'i', 'j', 'k'}, {'l', '1', 'm'}, {'n', 'o', 'p'}}, {{'I', 'K', 'N'}, {'t', '2', 'u'}, {'v', 'w', 'x'}},
                                                 {{'y', 'z', 'A'}, {'B', '3', 'C'}, {'a', 'd', 'f'}}, {{'G', 'H', 'F'}, {'J', '4', 'E'}, {'L', 'M', 'D'}}, {{'T', 'R', 'O'}, {'U', '5', 'P'}, {'V', 'S', 'Q'}}};
-                                                PrintMessages.printCubeMap(cube);
         cube = CubeMoves.GCW(cube);
         Assert.assertArrayEquals(expectedCube, cube);
     }

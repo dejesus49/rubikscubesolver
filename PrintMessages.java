@@ -7,9 +7,8 @@ public class PrintMessages {
 
     public static boolean printRules(Scanner in) {
         System.out.println("First, let's make sure you hold the cube right!");
-        System.out.println("Hold the cube with the face with the white center facing you.");
-        System.out.println("This will make the face with the yellow center face away from you.");
-        System.out.println("Maintaining this orientation, rotate the cube so that the face with the blue center faces right, the face with the orange center faces up, the face with the green center faces left, and the face with the red center faces down.");
+        System.out.println("Hold the cube with the face with the white center facing you. This will make the face with the yellow center face away from you.");
+        System.out.println("Maintaining this orientation, rotate the cube so that the face with the blue center faces right. This will make the face with the orange center face up, the green center face left, and the red center face down.");
         System.out.println("Great! You're ready to start!");
         String userInput;
         boolean proceed = true;
@@ -67,18 +66,20 @@ public class PrintMessages {
         }
     }
 
-    public static void getCubeInstructions(char[][][] cube) {
+    public static void getCubeInstructions() {
         try {
             System.out.println("\nLet's get your cube's orientation...");
             TimeUnit.SECONDS.sleep(3);
         } catch (InterruptedException e) {
             System.out.println("Sleep interrupted.");
         }
-        printCubeMap(cube);
+        char[][][] instructionCube = new char[][][]{{{'1','2','3'}, {'4','W','5'}, {'6','7','8'}}, {{'1','2','3'}, {'4','B','5'}, {'6','7','8'}}, {{'1','2','3'}, {'4','O','5'}, {'6','7','8'}},
+                                                    {{'1','2','3'}, {'4','R','5'}, {'6','7','8'}}, {{'1','2','3'}, {'4','Y','5'}, {'6','7','8'}}, {{'1','2','3'}, {'4','G','5'}, {'6','7','8'}}};
+        printCubeMap(instructionCube);
         System.out.println("\nEnter your cube's orientation with the first letter of each color (R O Y G B W) in the order described.");
-        System.out.println("The order of faces you will input is as follows: White, Blue, Yellow, Orange, Red, Green.");
+        System.out.println("The order of faces you will input is as follows: White, Blue, Orange, Red, Yellow, Green.");
         System.out.println("For each face, enter each square's color in the following order as shown in the map above: 1234X5678 where X is the first letter of the center square's color. Separate each face's orientation by a space."); 
-        System.out.println("Example input:\nRRWOWYBWR BGGBBYYWB WWORYWOGB WRGGOROYO GOYBROYOW RYRBGGGBY");
+        System.out.println("Example input:\nRRWOWYBWR BGGBBYYWB WRGGOROYO GOYBROYOW WWORYWOGB RYRBGGGBY");
         System.out.println("Please enter your cube orientation or type 'quit' to quit the program:");
     }
 

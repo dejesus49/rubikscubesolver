@@ -2,31 +2,32 @@ package rubikscubesolver;
 
 import java.util.*;
 import java.util.concurrent.*;
-// import java.io.File;
-// import java.io.FileNotFoundException;
-// import java.io.IOException;
-// import java.awt.Graphics;
-// import java.awt.image.BufferedImage;
-// import javax.swing.JPanel;
-// import javax.imageio.ImageIO;
 
 public class GetCube {
 
-    static String COLORS = "ROYGBW";
-    static char[][][] INSTRUCTIONCUBE = new char[][][]{{{'1','2','3'}, {'4','W','5'}, {'6','7','8'}}, {{'1','2','3'}, {'4','B','5'}, {'6','7','8'}}, {{'1','2','3'}, {'4','O','5'}, {'6','7','8'}}, {{'1','2','3'}, {'4','R','5'}, {'6','7','8'}}, {{'1','2','3'}, {'4','Y','5'}, {'6','7','8'}}, {{'1','2','3'}, {'4','G','5'}, {'6','7','8'}}};
-
     public static boolean inputCheck(String userInput) {
+        String colors = "ROYGBW";
         boolean check = true;
-        if (userInput.length() < 59) {
+        // should print feedback as to how input is invalid.
+        if (userInput.length() != 59) {
+            /* The length of the input for the cube orientation should be 59 because there should be 54 letters and 5 spaces separating every 9 letters.
+             * If this is not the length of the input, the input is invalid, so make check false to return false.
+             */
             check = false;
-        } else if (userInput.charAt(4) != 'W' || userInput.charAt(14) != 'B' || userInput.charAt(24) != 'Y' || userInput.charAt(34) != 'O' || userInput.charAt(44) != 'R' || userInput.charAt(54) != 'G') {
+        } else if (userInput.charAt(4) != 'W' || userInput.charAt(14) != 'B' || userInput.charAt(24) != 'O' || userInput.charAt(34) != 'R' || userInput.charAt(44) != 'Y' || userInput.charAt(54) != 'G') {
+            /* The 4th, 14th, 24th, 34th, 44th, and 54th indexes need to be the letters W,B,O,R,Y,G respectively.
+             * If those indexes do not hold those letters, the input is invalid, so make check false to return false.
+             */
             check = false;
         } else if (userInput.charAt(9) != ' ' || userInput.charAt(19) != ' ' || userInput.charAt(29) != ' ' || userInput.charAt(39) != ' ' || userInput.charAt(49) != ' ') {
+            /* The 9th, 19th, 29th, 39th, and 49th indexes need to be the character ' '.
+             * If those indexes do not hold ' ', the input is invalid, so make check false to return false.
+             */
             check = false;
         } else {
             Map <Character, Integer> colorCount = new HashMap<>();
             for (int i = 0; i < userInput.length(); ++i) {
-                if((COLORS.indexOf(userInput.charAt(i)) == -1 && userInput.charAt(i) != ' ')) {
+                if((colors.indexOf(userInput.charAt(i)) == -1 && userInput.charAt(i) != ' ')) {
                     check = false;
                     break;
                 } else if (userInput.charAt(i) != ' ') {
@@ -35,7 +36,7 @@ public class GetCube {
             }
             if (colorCount.size() == 6) {
                 for (int i = 0; i < 6; ++i) {
-                    if (colorCount.remove(COLORS.charAt(i)) != 9) {
+                    if (colorCount.remove(colors.charAt(i)) != 9) {
                         check = false;
                     }
                 }
@@ -48,8 +49,8 @@ public class GetCube {
     }
 
     public static char[][][] getCube(Scanner in, char[][][] cube) {
-        /* print out the defaultCube to give a visual of how the cube orientation should be input */
-        PrintMessages.getCubeInstructions(INSTRUCTIONCUBE);
+        /* Initialize an instruction cube to instruct the user  */
+        PrintMessages.getCubeInstructions();
         String userInput = in.nextLine().toUpperCase();
         if (!userInput.equals("QUIT")) {
             if (!inputCheck(userInput)) {
@@ -76,46 +77,14 @@ public class GetCube {
                 }
             }
             PrintMessages.printCubeMap(cube);
-            System.out.print("Is this correct? Y/N: "); // need to check for invalid inputs
+            System.out.print("\nIs this correct? Y/N: "); // need to check for invalid inputs
             if (in.nextLine().toUpperCase().charAt(0) == 'N') {
                 getCube(in, cube);
             }
         } else {
-            cube = null;// if user enters 'quit', assign null to cube to prevent main method from solving and to proceed to the farewell message
+            /* If the user enters 'quit', assign null to cube to prevent the main method from solving and to proceed to the farewell message. */
+            cube = null;
         }
         return cube;
     }
-    /* 
-    private static char[][][] getCube(char[][][] cube) {
-        try {
-            File cubeTest = new File("rubikscubesolver/cubetest.txt");
-            Scanner in = new Scanner(cubeTest);
-            try {
-                BufferedImage cubeImage = ImageIO.read(new File("rubikscubesolver/cubeImage.png"));
-                BufferedImage arrowImage = ImageIO.read(new File("rubikscubesolver/arrowImage.png"));
-                Graphics g = cubeImage.getGraphics();
-                g.drawImage(arrowImage, 10, 10, null);
-                for (int i = 0; i < 6; ++i) {
-                    for (int j = 0; j < 3; ++j) {
-                        for (int k = 0; k < 3; ++k){
-                            char userInput = Character.toUpperCase(in.nextLine().charAt(0));
-                            while (COLORS.indexOf(userInput) == -1) {
-                                System.out.println("ERROR: Invalid color input");
-                                System.out.print("ROYGBW: ");
-                                userInput = in.nextLine().charAt(0);
-                            }
-                            cube[i][j][k] = userInput;
-                        }
-                    }
-                }
-                printCube(cube);
-            }catch (IOException ex) {
-                System.out.println("Error finding picture.");
-            }
-            in.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Error finding file.");
-        }   
-    }
-    */
 }
