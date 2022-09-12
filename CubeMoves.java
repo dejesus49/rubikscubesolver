@@ -188,8 +188,8 @@ public class CubeMoves {
             temp = cube[1][i][2];
             cube[1][i][2] = cube[2][i][2];
             cube[2][i][2] = cube[5][2-i][0];
-            cube[5][2-i][0] = cube[2][i][2];
-            cube[2][i][2] = temp;
+            cube[5][2-i][0] = cube[3][i][2];
+            cube[3][i][2] = temp;
         }
         
         return cube;
@@ -203,8 +203,8 @@ public class CubeMoves {
             temp = cube[0][i][0];
             cube[0][i][0] = cube[2][0][2-i];
             cube[2][0][2-i] = cube[4][2-i][2];
-            cube[4][2-i][2] = cube[3][i][2];
-            cube[3][i][2] = temp;
+            cube[4][2-i][2] = cube[3][2][i];
+            cube[3][2][i] = temp;
         }
         
         return cube;
@@ -216,10 +216,10 @@ public class CubeMoves {
 
         for (int i = 0; i < 3; ++i) {
             temp = cube[0][i][0];
-            cube[0][i][0] = cube[3][2-i][0];
-            cube[3][2-i][0] = cube[4][2-i][2];
+            cube[0][i][0] = cube[3][2][i];
+            cube[3][2][i] = cube[4][2-i][2];
             cube[4][2-i][2] = cube[2][0][2-i];
-            cube[2][0][2-1] = temp;
+            cube[2][0][2-i] = temp;
         }
         
         return cube;
