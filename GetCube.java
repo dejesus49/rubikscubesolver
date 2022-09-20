@@ -49,7 +49,6 @@ public class GetCube {
     }
 
     public static char[][][] getCube(Scanner in, char[][][] cube) {
-        /* Initialize an instruction cube to instruct the user  */
         PrintMessages.getCubeInstructions();
         String userInput = in.nextLine().toUpperCase();
         if (!userInput.equals("QUIT")) {
