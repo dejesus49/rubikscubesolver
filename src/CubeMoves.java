@@ -1,4 +1,4 @@
-package rubikscubesolver;
+package rubikscubesolver.src;
 
 public class CubeMoves {
 

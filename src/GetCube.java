@@ -1,4 +1,4 @@
-package rubikscubesolver;
+package rubikscubesolver.src;
 
 import java.util.*;
 import java.util.concurrent.*;
