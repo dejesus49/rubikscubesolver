@@ -1,5 +1,3 @@
-package rubikscubesolver.src;
-
 import java.util.*;
 
 public class SolveCube {

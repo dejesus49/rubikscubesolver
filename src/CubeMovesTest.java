@@ -1,7 +1,4 @@
-package rubikscubesolver.tests;
-
 import org.junit.*;
-import rubikscubesolver.src.CubeMoves;
 
 public class CubeMovesTest {
 
