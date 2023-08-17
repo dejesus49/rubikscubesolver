@@ -1,5 +1,5 @@
-
-public class CubeMoves {
+package main;
+public abstract class CubeMoves {
 
     private static char[][][] mainFaceCW(char[][][] cube, int mainFace) {
         /* Switch the orientation of the edge pieces of the main face. */
@@ -35,7 +35,7 @@ public class CubeMoves {
         return cube;
     }
 
-    public static char[][][] WCW(char[][][] cube) {
+    protected static char[][][] WCW(char[][][] cube) {
         /* Call the function mainFaceCW to change the orientation of the white face. */
         cube = mainFaceCW(cube, 0);
         char temp = ' ';
@@ -51,7 +51,7 @@ public class CubeMoves {
         return cube;
     }
 
-    public static char[][][] WCCW(char[][][] cube) {
+    protected static char[][][] WCCW(char[][][] cube) {
         /* Call the function mainFaceCCW to change the orientation of the white face. */
         cube = mainFaceCCW(cube, 0);
         char temp = ' ';
@@ -67,7 +67,7 @@ public class CubeMoves {
         return cube;
     }
 
-    public static char[][][] BCW(char[][][] cube) {
+    protected static char[][][] BCW(char[][][] cube) {
         /* Call the function mainFaceCW to change the orientation of the blue face. */
         cube = mainFaceCW(cube, 1);
         char temp = ' ';
@@ -83,7 +83,7 @@ public class CubeMoves {
         return cube;
     }
 
-    public static char[][][] BCCW(char[][][] cube) {
+    protected static char[][][] BCCW(char[][][] cube) {
         /* Call the function mainFaceCCW to change the orientation of the blue face. */
         cube = mainFaceCCW(cube, 1);
         char temp = ' ';
@@ -99,7 +99,7 @@ public class CubeMoves {
         return cube;
     }
 
-    public static char[][][] OCW(char[][][] cube) {
+    protected static char[][][] OCW(char[][][] cube) {
         /* Call the function mainFaceCW to change the orientation of the orange face. */
         cube = mainFaceCW(cube, 2);
         char temp = ' ';
@@ -115,7 +115,7 @@ public class CubeMoves {
         return cube;
     }
 
-    public static char[][][] OCCW(char[][][] cube) {
+    protected static char[][][] OCCW(char[][][] cube) {
         /* Call the function mainFaceCCW to change the orientation of the orange face. */
         cube = mainFaceCCW(cube, 2);
         char temp = ' ';
@@ -131,7 +131,7 @@ public class CubeMoves {
         return cube;
     }
 
-    public static char[][][] RCW(char[][][] cube) {
+    protected static char[][][] RCW(char[][][] cube) {
         /* Call the function mainFaceCW to change the orientation of the red face. */
         cube = mainFaceCW(cube, 3);
         char temp = ' ';
@@ -147,7 +147,7 @@ public class CubeMoves {
         return cube;
     }
 
-    public static char[][][] RCCW(char[][][] cube) {
+    protected static char[][][] RCCW(char[][][] cube) {
         /* Call the function mainFaceCCW to change the orientation of the red face. */
         cube = mainFaceCCW(cube, 3);
         char temp = ' ';
@@ -163,7 +163,7 @@ public class CubeMoves {
         return cube;
     }
 
-    public static char[][][] YCW(char[][][] cube) {
+    protected static char[][][] YCW(char[][][] cube) {
         /* Call the function mainFaceCW to change the orientation of the yellow face. */
         cube = mainFaceCW(cube, 4);
         char temp = ' ';
@@ -179,7 +179,7 @@ public class CubeMoves {
         return cube;
     }
 
-    public static char[][][] YCCW(char[][][] cube) {
+    protected static char[][][] YCCW(char[][][] cube) {
         /* Call the function mainFaceCCW to change the orientation of the yellow face. */
         cube = mainFaceCCW(cube, 4);
         char temp = ' ';
@@ -195,7 +195,7 @@ public class CubeMoves {
         return cube;
     }
 
-    public static char[][][] GCW(char[][][] cube) {
+    protected static char[][][] GCW(char[][][] cube) {
         /* Call the function mainFaceCCW to change the orientation of the green face. */
         cube = mainFaceCW(cube, 5);
         char temp = ' ';
@@ -211,7 +211,7 @@ public class CubeMoves {
         return cube;
     }
 
-    public static char[][][] GCCW(char[][][] cube) {
+    protected static char[][][] GCCW(char[][][] cube) {
         /* Call the function mainFaceCCW to change the orientation of the green face. */
         cube = mainFaceCCW(cube, 5);
         char temp = ' ';

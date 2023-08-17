@@ -1,6 +1,8 @@
+package test;
 import org.junit.*;
+import main.CubeMoves;
 
-public class CubeMovesTest {
+public class CubeMovesTest extends CubeMoves {
 
     @Test
     public void testWCW_solved_cube() {
@@ -16,7 +18,7 @@ public class CubeMovesTest {
                 { { 'B', 'R', 'R' }, { 'B', 'R', 'R' }, { 'B', 'R', 'R' } },
                 { { 'Y', 'Y', 'Y' }, { 'Y', 'Y', 'Y' }, { 'Y', 'Y', 'Y' } },
                 { { 'G', 'G', 'R' }, { 'G', 'G', 'R' }, { 'G', 'G', 'R' } } };
-        cube = CubeMoves.WCW(cube);
+        cube = WCW(cube);
         Assert.assertArrayEquals(expectedCube, cube);
     }
 
@@ -34,7 +36,7 @@ public class CubeMovesTest {
                 { { 'G', 'R', 'R' }, { 'G', 'R', 'R' }, { 'G', 'R', 'R' } },
                 { { 'Y', 'Y', 'Y' }, { 'Y', 'Y', 'Y' }, { 'Y', 'Y', 'Y' } },
                 { { 'G', 'G', 'O' }, { 'G', 'G', 'O' }, { 'G', 'G', 'O' } } };
-        cube = CubeMoves.WCCW(cube);
+        cube = WCCW(cube);
         Assert.assertArrayEquals(expectedCube, cube);
     }
 
@@ -52,7 +54,7 @@ public class CubeMovesTest {
                 { { 'i', 'z', 'A' }, { 'l', '3', 'C' }, { 'n', 'E', 'F' } },
                 { { 'G', 'H', 'I' }, { 'J', '4', 'K' }, { 'L', 'M', 'N' } },
                 { { 'O', 'P', 'D' }, { 'R', '5', 'B' }, { 'T', 'U', 'y' } } };
-        cube = CubeMoves.WCW(cube);
+        cube = WCW(cube);
         Assert.assertArrayEquals(expectedCube, cube);
     }
 
@@ -70,7 +72,7 @@ public class CubeMovesTest {
                 { { 'V', 'z', 'A' }, { 'S', '3', 'C' }, { 'Q', 'E', 'F' } },
                 { { 'G', 'H', 'I' }, { 'J', '4', 'K' }, { 'L', 'M', 'N' } },
                 { { 'O', 'P', 'v' }, { 'R', '5', 't' }, { 'T', 'U', 'q' } } };
-        cube = CubeMoves.WCCW(cube);
+        cube = WCCW(cube);
         Assert.assertArrayEquals(expectedCube, cube);
     }
 
@@ -88,7 +90,7 @@ public class CubeMovesTest {
                 { { 'Y', 'Y', 'Y' }, { 'R', 'R', 'R' }, { 'R', 'R', 'R' } },
                 { { 'O', 'Y', 'Y' }, { 'O', 'Y', 'Y' }, { 'O', 'Y', 'Y' } },
                 { { 'G', 'G', 'G' }, { 'G', 'G', 'G' }, { 'G', 'G', 'G' } } };
-        cube = CubeMoves.BCW(cube);
+        cube = BCW(cube);
         Assert.assertArrayEquals(expectedCube, cube);
     }
 
@@ -106,7 +108,7 @@ public class CubeMovesTest {
                 { { 'W', 'W', 'W' }, { 'R', 'R', 'R' }, { 'R', 'R', 'R' } },
                 { { 'R', 'Y', 'Y' }, { 'R', 'Y', 'Y' }, { 'R', 'Y', 'Y' } },
                 { { 'G', 'G', 'G' }, { 'G', 'G', 'G' }, { 'G', 'G', 'G' } } };
-        cube = CubeMoves.BCCW(cube);
+        cube = BCCW(cube);
         Assert.assertArrayEquals(expectedCube, cube);
     }
 
@@ -124,7 +126,7 @@ public class CubeMovesTest {
                 { { 'L', 'J', 'G' }, { 'B', '3', 'C' }, { 'D', 'E', 'F' } },
                 { { 'v', 'H', 'I' }, { 'w', '4', 'K' }, { 'x', 'M', 'N' } },
                 { { 'O', 'P', 'Q' }, { 'R', '5', 'S' }, { 'T', 'U', 'V' } } };
-        cube = CubeMoves.BCW(cube);
+        cube = BCW(cube);
         Assert.assertArrayEquals(expectedCube, cube);
     }
 
@@ -142,7 +144,7 @@ public class CubeMovesTest {
                 { { 'c', 'e', 'h' }, { 'B', '3', 'C' }, { 'D', 'E', 'F' } },
                 { { 'A', 'H', 'I' }, { 'z', '4', 'K' }, { 'y', 'M', 'N' } },
                 { { 'O', 'P', 'Q' }, { 'R', '5', 'S' }, { 'T', 'U', 'V' } } };
-        cube = CubeMoves.BCCW(cube);
+        cube = BCCW(cube);
         Assert.assertArrayEquals(expectedCube, cube);
     }
 
@@ -160,7 +162,7 @@ public class CubeMovesTest {
                 { { 'R', 'R', 'R' }, { 'R', 'R', 'R' }, { 'R', 'R', 'R' } },
                 { { 'G', 'G', 'G' }, { 'Y', 'Y', 'Y' }, { 'Y', 'Y', 'Y' } },
                 { { 'W', 'W', 'W' }, { 'G', 'G', 'G' }, { 'G', 'G', 'G' } } };
-        cube = CubeMoves.OCW(cube);
+        cube = OCW(cube);
         Assert.assertArrayEquals(expectedCube, cube);
     }
 
@@ -178,7 +180,7 @@ public class CubeMovesTest {
                 { { 'R', 'R', 'R' }, { 'R', 'R', 'R' }, { 'R', 'R', 'R' } },
                 { { 'B', 'B', 'B' }, { 'Y', 'Y', 'Y' }, { 'Y', 'Y', 'Y' } },
                 { { 'Y', 'Y', 'Y' }, { 'G', 'G', 'G' }, { 'G', 'G', 'G' } } };
-        cube = CubeMoves.OCCW(cube);
+        cube = OCCW(cube);
         Assert.assertArrayEquals(expectedCube, cube);
     }
 
@@ -196,7 +198,7 @@ public class CubeMovesTest {
                 { { 'y', 'z', 'A' }, { 'B', '3', 'C' }, { 'D', 'E', 'F' } },
                 { { 'O', 'P', 'Q' }, { 'J', '4', 'K' }, { 'L', 'M', 'N' } },
                 { { 'a', 'b', 'c' }, { 'R', '5', 'S' }, { 'T', 'U', 'V' } } };
-        cube = CubeMoves.OCW(cube);
+        cube = OCW(cube);
         Assert.assertArrayEquals(expectedCube, cube);
     }
 
@@ -214,7 +216,7 @@ public class CubeMovesTest {
                 { { 'y', 'z', 'A' }, { 'B', '3', 'C' }, { 'D', 'E', 'F' } },
                 { { 'i', 'j', 'k' }, { 'J', '4', 'K' }, { 'L', 'M', 'N' } },
                 { { 'G', 'H', 'I' }, { 'R', '5', 'S' }, { 'T', 'U', 'V' } } };
-        cube = CubeMoves.OCCW(cube);
+        cube = OCCW(cube);
         Assert.assertArrayEquals(expectedCube, cube);
     }
 
@@ -232,7 +234,7 @@ public class CubeMovesTest {
                 { { 'R', 'R', 'R' }, { 'R', 'R', 'R' }, { 'R', 'R', 'R' } },
                 { { 'Y', 'Y', 'Y' }, { 'Y', 'Y', 'Y' }, { 'B', 'B', 'B' } },
                 { { 'G', 'G', 'G' }, { 'G', 'G', 'G' }, { 'Y', 'Y', 'Y' } } };
-        cube = CubeMoves.RCW(cube);
+        cube = RCW(cube);
         Assert.assertArrayEquals(expectedCube, cube);
     }
 
@@ -250,7 +252,7 @@ public class CubeMovesTest {
                 { { 'R', 'R', 'R' }, { 'R', 'R', 'R' }, { 'R', 'R', 'R' } },
                 { { 'Y', 'Y', 'Y' }, { 'Y', 'Y', 'Y' }, { 'G', 'G', 'G' } },
                 { { 'G', 'G', 'G' }, { 'G', 'G', 'G' }, { 'W', 'W', 'W' } } };
-        cube = CubeMoves.RCCW(cube);
+        cube = RCCW(cube);
         Assert.assertArrayEquals(expectedCube, cube);
     }
 
@@ -268,7 +270,7 @@ public class CubeMovesTest {
                 { { 'D', 'B', 'y' }, { 'E', '3', 'z' }, { 'F', 'C', 'A' } },
                 { { 'G', 'H', 'I' }, { 'J', '4', 'K' }, { 'n', 'o', 'p' } },
                 { { 'O', 'P', 'Q' }, { 'R', '5', 'S' }, { 'L', 'M', 'N' } } };
-        cube = CubeMoves.RCW(cube);
+        cube = RCW(cube);
         Assert.assertArrayEquals(expectedCube, cube);
     }
 
@@ -286,7 +288,7 @@ public class CubeMovesTest {
                 { { 'A', 'C', 'F' }, { 'z', '3', 'E' }, { 'y', 'B', 'D' } },
                 { { 'G', 'H', 'I' }, { 'J', '4', 'K' }, { 'T', 'U', 'V' } },
                 { { 'O', 'P', 'Q' }, { 'R', '5', 'S' }, { 'f', 'g', 'h' } } };
-        cube = CubeMoves.RCCW(cube);
+        cube = RCCW(cube);
         Assert.assertArrayEquals(expectedCube, cube);
     }
 
@@ -304,7 +306,7 @@ public class CubeMovesTest {
                 { { 'R', 'R', 'G' }, { 'R', 'R', 'G' }, { 'R', 'R', 'G' } },
                 { { 'Y', 'Y', 'Y' }, { 'Y', 'Y', 'Y' }, { 'Y', 'Y', 'Y' } },
                 { { 'O', 'G', 'G' }, { 'O', 'G', 'G' }, { 'O', 'G', 'G' } } };
-        cube = CubeMoves.YCW(cube);
+        cube = YCW(cube);
         Assert.assertArrayEquals(expectedCube, cube);
     }
 
@@ -322,7 +324,7 @@ public class CubeMovesTest {
                 { { 'R', 'R', 'B' }, { 'R', 'R', 'B' }, { 'R', 'R', 'B' } },
                 { { 'Y', 'Y', 'Y' }, { 'Y', 'Y', 'Y' }, { 'Y', 'Y', 'Y' } },
                 { { 'R', 'G', 'G' }, { 'R', 'G', 'G' }, { 'R', 'G', 'G' } } };
-        cube = CubeMoves.YCCW(cube);
+        cube = YCCW(cube);
         Assert.assertArrayEquals(expectedCube, cube);
     }
 
@@ -340,7 +342,7 @@ public class CubeMovesTest {
                 { { 'y', 'z', 'T' }, { 'B', '3', 'R' }, { 'D', 'E', 'O' } },
                 { { 'L', 'J', 'G' }, { 'M', '4', 'H' }, { 'N', 'K', 'I' } },
                 { { 'x', 'P', 'Q' }, { 'u', '5', 'S' }, { 's', 'U', 'V' } } };
-        cube = CubeMoves.YCW(cube);
+        cube = YCW(cube);
         Assert.assertArrayEquals(expectedCube, cube);
     }
 
@@ -358,7 +360,7 @@ public class CubeMovesTest {
                 { { 'y', 'z', 'k' }, { 'B', '3', 'm' }, { 'D', 'E', 'p' } },
                 { { 'I', 'K', 'N' }, { 'H', '4', 'M' }, { 'G', 'J', 'L' } },
                 { { 'F', 'P', 'Q' }, { 'C', '5', 'S' }, { 'A', 'U', 'V' } } };
-        cube = CubeMoves.YCCW(cube);
+        cube = YCCW(cube);
         Assert.assertArrayEquals(expectedCube, cube);
     }
 
@@ -376,7 +378,7 @@ public class CubeMovesTest {
                 { { 'R', 'R', 'R' }, { 'R', 'R', 'R' }, { 'W', 'W', 'W' } },
                 { { 'Y', 'Y', 'R' }, { 'Y', 'Y', 'R' }, { 'Y', 'Y', 'R' } },
                 { { 'G', 'G', 'G' }, { 'G', 'G', 'G' }, { 'G', 'G', 'G' } } };
-        cube = CubeMoves.GCW(cube);
+        cube = GCW(cube);
         Assert.assertArrayEquals(expectedCube, cube);
     }
 
@@ -394,7 +396,7 @@ public class CubeMovesTest {
                 { { 'R', 'R', 'R' }, { 'R', 'R', 'R' }, { 'Y', 'Y', 'Y' } },
                 { { 'Y', 'Y', 'O' }, { 'Y', 'Y', 'O' }, { 'Y', 'Y', 'O' } },
                 { { 'G', 'G', 'G' }, { 'G', 'G', 'G' }, { 'G', 'G', 'G' } } };
-        cube = CubeMoves.GCCW(cube);
+        cube = GCCW(cube);
         Assert.assertArrayEquals(expectedCube, cube);
     }
 
@@ -412,7 +414,7 @@ public class CubeMovesTest {
                 { { 'y', 'z', 'A' }, { 'B', '3', 'C' }, { 'a', 'd', 'f' } },
                 { { 'G', 'H', 'F' }, { 'J', '4', 'E' }, { 'L', 'M', 'D' } },
                 { { 'T', 'R', 'O' }, { 'U', '5', 'P' }, { 'V', 'S', 'Q' } } };
-        cube = CubeMoves.GCW(cube);
+        cube = GCW(cube);
         Assert.assertArrayEquals(expectedCube, cube);
     }
 
@@ -430,7 +432,7 @@ public class CubeMovesTest {
                 { { 'y', 'z', 'A' }, { 'B', '3', 'C' }, { 'N', 'K', 'I' } },
                 { { 'G', 'H', 'q' }, { 'J', '4', 'r' }, { 'L', 'M', 's' } },
                 { { 'Q', 'S', 'V' }, { 'P', '5', 'U' }, { 'O', 'R', 'T' } } };
-        cube = CubeMoves.GCCW(cube);
+        cube = GCCW(cube);
         Assert.assertArrayEquals(expectedCube, cube);
     }
 }
